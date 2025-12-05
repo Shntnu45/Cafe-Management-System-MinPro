@@ -13,6 +13,9 @@ import { protect, authorize, optionalAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
+// Root route for menu
+router.get('/', optionalAuth, getMenuItems);
+
 // Public routes (no auth required for viewing)
 router.get('/categories', optionalAuth, getCategories);
 router.get('/categories-with-menus', optionalAuth, getCategoriesWithMenus);
