@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration for different environments
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL] 
+    ? ['https://cafe-management-frontend-9k0e.onrender.com', process.env.FRONTEND_URL] 
     : ['http://localhost:5173', 'http://localhost:5000', 'http://127.0.0.1:5173'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
@@ -37,6 +37,20 @@ app.use('/api/menu', menuRoutes);
 app.use('/api/tables', tableRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/payments', paymentRoutes);
+
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'Cafe Management System API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/api/health',
+      menu: '/api/menu',
+      auth: '/api/auth',
+      tables: '/api/tables'
+    }
+  });
+});
 
 app.get('/api/health', (req, res) => {
   res.status(200).json({
