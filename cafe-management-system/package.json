@@ -10,7 +10,8 @@
     "build": "echo \"No build step required for Node.js backend\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node seedData.js",
-    "migrate": "node migrations/migrate.js"
+    "migrate": "node migrations/migrate.js",
+    "update-images": "node updateMenuImages.js"
   },
   "keywords": ["cafe", "restaurant", "management", "nodejs", "express", "mysql", "sequelize"],
   "author": "Your Name",

@@ -62,9 +62,19 @@ export const getMenuItems = async (req, res) => {
       order: [['name', 'ASC']]
     });
 
+    // Process image URLs for each menu item
+    const processedMenus = menuItems.rows.map(item => {
+      const itemData = item.toJSON();
+      if (itemData.image && itemData.image.startsWith('/api/')) {
+        const baseUrl = `${req.protocol}://${req.get('host')}`;
+        itemData.image = baseUrl + itemData.image;
+      }
+      return itemData;
+    });
+
     res.status(200).json(
       formatResponse(true, 'Menu items retrieved successfully', {
-        menus: menuItems.rows,
+        menus: processedMenus,
         pagination: {
           page: parseInt(page),
           limit: parseInt(limit),
@@ -334,8 +344,23 @@ export const getCategoriesWithMenus = async (req, res) => {
       ]
     });
 
+    // Process image URLs for each menu item in categories
+    const processedCategories = categories.map(category => {
+      const categoryData = category.toJSON();
+      if (categoryData.Menus) {
+        categoryData.Menus = categoryData.Menus.map(item => {
+          if (item.image && item.image.startsWith('/api/')) {
+            const baseUrl = `${req.protocol}://${req.get('host')}`;
+            item.image = baseUrl + item.image;
+          }
+          return item;
+        });
+      }
+      return categoryData;
+    });
+
     res.status(200).json(
-      formatResponse(true, 'Categories with menus retrieved successfully', { categories })
+      formatResponse(true, 'Categories with menus retrieved successfully', { categories: processedCategories })
     );
   } catch (error) {
     console.error('Get categories with menus error:', error);

@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
@@ -10,6 +12,9 @@ import orderRoutes from './routes/orders.js';
 import paymentRoutes from './routes/payments.js';
 
 import { sequelize, models, setupAssociations } from './models/index.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
@@ -31,6 +36,9 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Serve static files (images)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/menu', menuRoutes);
@@ -47,9 +55,32 @@ app.get('/', (req, res) => {
       health: '/api/health',
       menu: '/api/menu',
       auth: '/api/auth',
-      tables: '/api/tables'
+      tables: '/api/tables',
+      uploads: '/uploads'
     }
   });
+});
+
+// Serve default menu images
+app.get('/api/menu/image/:itemName', (req, res) => {
+  const { itemName } = req.params;
+  const imageMap = {
+    'Cappuccino': 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop',
+    'Americano': 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=300&fit=crop',
+    'Espresso': 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=400&h=300&fit=crop',
+    'Latte': 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=400&h=300&fit=crop',
+    'Iced Coffee': 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop',
+    'Fresh Orange Juice': 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop',
+    'Pancakes': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop',
+    'Omelette': 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop',
+    'Club Sandwich': 'https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&h=300&fit=crop',
+    'Caesar Salad': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop',
+    'Chocolate Cake': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop',
+    'Cheesecake': 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop'
+  };
+  
+  const imageUrl = imageMap[itemName] || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop';
+  res.redirect(imageUrl);
 });
 
 app.get('/api/health', (req, res) => {
@@ -158,17 +189,94 @@ const createDefaultData = async () => {
       const desserts = categories.find(c => c.name === 'Desserts');
 
       await Menu.bulkCreate([
-        { name: 'Espresso', price: 3.50, categoryId: hotBev.id, preparationTime: 5 },
-        { name: 'Cappuccino', price: 4.50, categoryId: hotBev.id, preparationTime: 7 },
-        { name: 'Latte', price: 4.75, categoryId: hotBev.id, preparationTime: 8 },
-        { name: 'Iced Coffee', price: 4.25, categoryId: coldBev.id, preparationTime: 5 },
-        { name: 'Fresh Orange Juice', price: 3.75, categoryId: coldBev.id, preparationTime: 3 },
-        { name: 'Pancakes', price: 8.50, categoryId: breakfast.id, preparationTime: 15 },
-        { name: 'Omelette', price: 7.25, categoryId: breakfast.id, preparationTime: 12 },
-        { name: 'Club Sandwich', price: 9.75, categoryId: lunchDinner.id, preparationTime: 10 },
-        { name: 'Caesar Salad', price: 8.25, categoryId: lunchDinner.id, preparationTime: 8 },
-        { name: 'Chocolate Cake', price: 5.50, categoryId: desserts.id, preparationTime: 5 },
-        { name: 'Cheesecake', price: 6.25, categoryId: desserts.id, preparationTime: 5 }
+        { 
+          name: 'Espresso', 
+          price: 3.50, 
+          categoryId: hotBev.id, 
+          preparationTime: 5,
+          image: '/api/menu/image/Espresso',
+          description: 'Rich and bold espresso shot'
+        },
+        { 
+          name: 'Cappuccino', 
+          price: 4.50, 
+          categoryId: hotBev.id, 
+          preparationTime: 7,
+          image: '/api/menu/image/Cappuccino',
+          description: 'Perfect blend of espresso, steamed milk and foam'
+        },
+        { 
+          name: 'Latte', 
+          price: 4.75, 
+          categoryId: hotBev.id, 
+          preparationTime: 8,
+          image: '/api/menu/image/Latte',
+          description: 'Smooth espresso with steamed milk'
+        },
+        { 
+          name: 'Iced Coffee', 
+          price: 4.25, 
+          categoryId: coldBev.id, 
+          preparationTime: 5,
+          image: '/api/menu/image/Iced Coffee',
+          description: 'Refreshing cold brew coffee'
+        },
+        { 
+          name: 'Fresh Orange Juice', 
+          price: 3.75, 
+          categoryId: coldBev.id, 
+          preparationTime: 3,
+          image: '/api/menu/image/Fresh Orange Juice',
+          description: 'Freshly squeezed orange juice'
+        },
+        { 
+          name: 'Pancakes', 
+          price: 8.50, 
+          categoryId: breakfast.id, 
+          preparationTime: 15,
+          image: '/api/menu/image/Pancakes',
+          description: 'Fluffy pancakes with maple syrup'
+        },
+        { 
+          name: 'Omelette', 
+          price: 7.25, 
+          categoryId: breakfast.id, 
+          preparationTime: 12,
+          image: '/api/menu/image/Omelette',
+          description: 'Three-egg omelette with your choice of fillings'
+        },
+        { 
+          name: 'Club Sandwich', 
+          price: 9.75, 
+          categoryId: lunchDinner.id, 
+          preparationTime: 10,
+          image: '/api/menu/image/Club Sandwich',
+          description: 'Triple-decker sandwich with chicken, bacon and vegetables'
+        },
+        { 
+          name: 'Caesar Salad', 
+          price: 8.25, 
+          categoryId: lunchDinner.id, 
+          preparationTime: 8,
+          image: '/api/menu/image/Caesar Salad',
+          description: 'Fresh romaine lettuce with Caesar dressing and croutons'
+        },
+        { 
+          name: 'Chocolate Cake', 
+          price: 5.50, 
+          categoryId: desserts.id, 
+          preparationTime: 5,
+          image: '/api/menu/image/Chocolate Cake',
+          description: 'Rich chocolate cake with chocolate frosting'
+        },
+        { 
+          name: 'Cheesecake', 
+          price: 6.25, 
+          categoryId: desserts.id, 
+          preparationTime: 5,
+          image: '/api/menu/image/Cheesecake',
+          description: 'Creamy New York style cheesecake'
+        }
       ]);
       console.log('Default menu items created');
     }
