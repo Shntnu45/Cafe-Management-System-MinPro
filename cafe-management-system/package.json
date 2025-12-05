@@ -1,0 +1,30 @@
+{
+  "name": "cafe-management-system",
+  "version": "1.0.0",
+  "description": "Complete Cafe Management System Backend",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
+    "build": "echo \"No build step required for Node.js backend\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node seedData.js",
+    "migrate": "node migrations/migrate.js"
+  },
+  "keywords": ["cafe", "restaurant", "management", "nodejs", "express", "mysql", "sequelize"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.5",
+    "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

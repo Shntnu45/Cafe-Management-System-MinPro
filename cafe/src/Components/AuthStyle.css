@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.auth-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #c81414, #e63737);
+}
+
+.auth-container {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  max-width: 95%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.auth-form {
+  width: 50%;
+  padding: 40px;
+  z-index: 1;
+}
+
+.auth-form h2 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-form input {
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.auth-form input:focus {
+  border: 2px solid #2a5298;
+  outline: none;
+}
+
+.submit-btn {
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to left, #1e3c72, #2a5298);
+}
+
+.role-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.role-buttons button {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 2px solid #2a5298;
+  background: transparent;
+  color: #2a5298;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.role-buttons button.active.user {
+  background: #e16049;
+  color: white;
+}
+
+.role-buttons button.active.admin {
+  background: #d9534f;
+  border-color: #d9534f;
+  color: white;
+}
+
+.auth-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.auth-link {
+  color: #2a5298;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-toggle {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to bottom right, #ed897a, #571c0b);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+}
+
+.auth-toggle h2 {
+  margin-bottom: 15px;
+}
+
+.auth-toggle p {
+  font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-form,
+  .auth-toggle {
+    width: 100%;
+  }
+
+  .auth-toggle {
+    border-radius: 0;
+  }
+}
