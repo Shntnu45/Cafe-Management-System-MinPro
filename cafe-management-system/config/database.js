@@ -4,13 +4,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  process.env.DATABASE_URL || `${process.env.NODE_ENV === 'production' ? 'postgres' : 'mysql'}://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT || (process.env.NODE_ENV === 'production' ? 5432 : 3306)}/${process.env.DB_NAME}`,
   {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 3306,
-    dialect: 'mysql',
+    dialect: process.env.NODE_ENV === 'production' ? 'postgres' : 'mysql',
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     pool: {
       max: process.env.NODE_ENV === 'production' ? 10 : 5,
