@@ -22,8 +22,12 @@ const Table = sequelize.define('Table', {
     defaultValue: 'available'
   },
   occupiedBy: {
-    type: DataTypes.STRING(100),
-    allowNull: true
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'users',
+      key: 'id'
+    }
   },
   location: {
     type: DataTypes.STRING(50),
