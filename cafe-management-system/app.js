@@ -65,18 +65,65 @@ app.get('/', (req, res) => {
 app.get('/api/menu/image/:itemName', (req, res) => {
   const { itemName } = req.params;
   const imageMap = {
-    'Cappuccino': 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=300&fit=crop',
-    'Americano': 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=300&fit=crop',
-    'Espresso': 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=400&h=300&fit=crop',
-    'Latte': 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?w=400&h=300&fit=crop',
+    // Hot Beverages
+    'Masala Chai': 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop',
+    'Adrak Chai': 'https://images.unsplash.com/photo-1597318181409-cf85b0c7740d?w=400&h=300&fit=crop',
+    'Elaichi Chai': 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop',
+    'Filter Coffee': 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop',
+    'Hot Chocolate': 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400&h=300&fit=crop',
+    'Badam Milk (Hot)': 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop',
+    'Green Tea': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop',
+    'Lemon Tea (Hot)': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop',
+    'Black Coffee': 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop',
+    'Turmeric Latte (Haldi Doodh)': 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400&h=300&fit=crop',
+    
+    // Cold Beverages
+    'Sweet Lassi': 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop',
+    'Masala Chaas': 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop',
+    'Cold Coffee': 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop',
+    'Fresh Lime Soda (Sweet/Salt)': 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop',
+    'Mango Shake': 'https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=400&h=300&fit=crop',
+    'Banana Shake': 'https://images.unsplash.com/photo-1553979459-d2229ba7433a?w=400&h=300&fit=crop',
+    'Rose Milk': 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?w=400&h=300&fit=crop',
+    'Iced Tea (Lemon)': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&h=300&fit=crop',
     'Iced Coffee': 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop',
-    'Fresh Orange Juice': 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop',
-    'Pancakes': 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop',
-    'Omelette': 'https://images.unsplash.com/photo-1525351484163-7529414344d8?w=400&h=300&fit=crop',
-    'Club Sandwich': 'https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&h=300&fit=crop',
-    'Caesar Salad': 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop',
-    'Chocolate Cake': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop',
-    'Cheesecake': 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop'
+    'Watermelon Juice': 'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=400&h=300&fit=crop',
+    
+    // Breakfast
+    'Aloo Paratha': 'https://images.unsplash.com/photo-1574653853027-5d3ba0c95f5d?w=400&h=300&fit=crop',
+    'Masala Dosa': 'https://images.unsplash.com/photo-1630383249896-424e482df921?w=400&h=300&fit=crop',
+    'Idli Sambar (2 pcs)': 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400&h=300&fit=crop',
+    'Poha': 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop',
+    'Upma': 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop',
+    'Chole Bhature': 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop',
+    'Veg Sandwich (Grilled)': 'https://images.unsplash.com/photo-1567234669003-dce7a7a88821?w=400&h=300&fit=crop',
+    'Paneer Paratha': 'https://images.unsplash.com/photo-1574653853027-5d3ba0c95f5d?w=400&h=300&fit=crop',
+    'Poori Bhaji': 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop',
+    'Sabudana Khichdi': 'https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop',
+    
+    // Lunch & Dinner
+    'Paneer Butter Masala with Naan': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop',
+    'Veg Biryani': 'https://images.unsplash.com/photo-1563379091339-03246963d51a?w=400&h=300&fit=crop',
+    'Dal Tadka with Jeera Rice': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop',
+    'Veg Thali (Full)': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop',
+    'Chole Kulche': 'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400&h=300&fit=crop',
+    'Veg Fried Rice': 'https://images.unsplash.com/photo-1563379091339-03246963d51a?w=400&h=300&fit=crop',
+    'Hakka Noodles (Veg)': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop',
+    'Palak Paneer with Roti': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop',
+    'Rajma Chawal': 'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop',
+    'Paneer Tikka': 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop',
+    
+    // Desserts
+    'Gulab Jamun (2 pcs)': 'https://images.unsplash.com/photo-1571167530149-c72f2dbf7e98?w=400&h=300&fit=crop',
+    'Rasmalai (2 pcs)': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop',
+    'Kaju Katli (2 pcs)': 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop',
+    'Gajar Halwa': 'https://images.unsplash.com/photo-1571167530149-c72f2dbf7e98?w=400&h=300&fit=crop',
+    'Kulfi (Malai)': 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400&h=300&fit=crop',
+    'Jalebi (100g)': 'https://images.unsplash.com/photo-1571167530149-c72f2dbf7e98?w=400&h=300&fit=crop',
+    'Rabri': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop',
+    'Basundi': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop',
+    'Sandesh': 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400&h=300&fit=crop',
+    'Badam Kheer': 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop'
   };
   
   const imageUrl = imageMap[itemName] || 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop';
@@ -189,94 +236,65 @@ const createDefaultData = async () => {
       const desserts = categories.find(c => c.name === 'Desserts');
 
       await Menu.bulkCreate([
-        { 
-          name: 'Espresso', 
-          price: 3.50, 
-          categoryId: hotBev.id, 
-          preparationTime: 5,
-          image: '/api/menu/image/Espresso',
-          description: 'Rich and bold espresso shot'
-        },
-        { 
-          name: 'Cappuccino', 
-          price: 4.50, 
-          categoryId: hotBev.id, 
-          preparationTime: 7,
-          image: '/api/menu/image/Cappuccino',
-          description: 'Perfect blend of espresso, steamed milk and foam'
-        },
-        { 
-          name: 'Latte', 
-          price: 4.75, 
-          categoryId: hotBev.id, 
-          preparationTime: 8,
-          image: '/api/menu/image/Latte',
-          description: 'Smooth espresso with steamed milk'
-        },
-        { 
-          name: 'Iced Coffee', 
-          price: 4.25, 
-          categoryId: coldBev.id, 
-          preparationTime: 5,
-          image: '/api/menu/image/Iced Coffee',
-          description: 'Refreshing cold brew coffee'
-        },
-        { 
-          name: 'Fresh Orange Juice', 
-          price: 3.75, 
-          categoryId: coldBev.id, 
-          preparationTime: 3,
-          image: '/api/menu/image/Fresh Orange Juice',
-          description: 'Freshly squeezed orange juice'
-        },
-        { 
-          name: 'Pancakes', 
-          price: 8.50, 
-          categoryId: breakfast.id, 
-          preparationTime: 15,
-          image: '/api/menu/image/Pancakes',
-          description: 'Fluffy pancakes with maple syrup'
-        },
-        { 
-          name: 'Omelette', 
-          price: 7.25, 
-          categoryId: breakfast.id, 
-          preparationTime: 12,
-          image: '/api/menu/image/Omelette',
-          description: 'Three-egg omelette with your choice of fillings'
-        },
-        { 
-          name: 'Club Sandwich', 
-          price: 9.75, 
-          categoryId: lunchDinner.id, 
-          preparationTime: 10,
-          image: '/api/menu/image/Club Sandwich',
-          description: 'Triple-decker sandwich with chicken, bacon and vegetables'
-        },
-        { 
-          name: 'Caesar Salad', 
-          price: 8.25, 
-          categoryId: lunchDinner.id, 
-          preparationTime: 8,
-          image: '/api/menu/image/Caesar Salad',
-          description: 'Fresh romaine lettuce with Caesar dressing and croutons'
-        },
-        { 
-          name: 'Chocolate Cake', 
-          price: 5.50, 
-          categoryId: desserts.id, 
-          preparationTime: 5,
-          image: '/api/menu/image/Chocolate Cake',
-          description: 'Rich chocolate cake with chocolate frosting'
-        },
-        { 
-          name: 'Cheesecake', 
-          price: 6.25, 
-          categoryId: desserts.id, 
-          preparationTime: 5,
-          image: '/api/menu/image/Cheesecake',
-          description: 'Creamy New York style cheesecake'
-        }
+        // Hot Beverages
+        { name: 'Masala Chai', price: 20, categoryId: hotBev.id, preparationTime: 5, image: '/api/menu/image/Masala Chai', description: 'Traditional spiced tea with aromatic spices' },
+        { name: 'Adrak Chai', price: 25, categoryId: hotBev.id, preparationTime: 5, image: '/api/menu/image/Adrak Chai', description: 'Ginger-infused tea for a warming experience' },
+        { name: 'Elaichi Chai', price: 25, categoryId: hotBev.id, preparationTime: 5, image: '/api/menu/image/Elaichi Chai', description: 'Cardamom-flavored tea with rich aroma' },
+        { name: 'Filter Coffee', price: 40, categoryId: hotBev.id, preparationTime: 7, image: '/api/menu/image/Filter Coffee', description: 'South Indian style filter coffee' },
+        { name: 'Hot Chocolate', price: 90, categoryId: hotBev.id, preparationTime: 8, image: '/api/menu/image/Hot Chocolate', description: 'Rich and creamy hot chocolate' },
+        { name: 'Badam Milk (Hot)', price: 70, categoryId: hotBev.id, preparationTime: 10, image: '/api/menu/image/Badam Milk (Hot)', description: 'Warm almond milk with nuts' },
+        { name: 'Green Tea', price: 40, categoryId: hotBev.id, preparationTime: 5, image: '/api/menu/image/Green Tea', description: 'Healthy antioxidant-rich green tea' },
+        { name: 'Lemon Tea (Hot)', price: 35, categoryId: hotBev.id, preparationTime: 5, image: '/api/menu/image/Lemon Tea (Hot)', description: 'Refreshing lemon-infused tea' },
+        { name: 'Black Coffee', price: 45, categoryId: hotBev.id, preparationTime: 5, image: '/api/menu/image/Black Coffee', description: 'Strong black coffee for coffee lovers' },
+        { name: 'Turmeric Latte (Haldi Doodh)', price: 55, categoryId: hotBev.id, preparationTime: 8, image: '/api/menu/image/Turmeric Latte (Haldi Doodh)', description: 'Healthy turmeric milk with spices' },
+        
+        // Cold Beverages
+        { name: 'Sweet Lassi', price: 60, categoryId: coldBev.id, preparationTime: 5, image: '/api/menu/image/Sweet Lassi', description: 'Traditional yogurt-based sweet drink' },
+        { name: 'Masala Chaas', price: 35, categoryId: coldBev.id, preparationTime: 5, image: '/api/menu/image/Masala Chaas', description: 'Spiced buttermilk with herbs' },
+        { name: 'Cold Coffee', price: 90, categoryId: coldBev.id, preparationTime: 7, image: '/api/menu/image/Cold Coffee', description: 'Chilled coffee with ice cream' },
+        { name: 'Fresh Lime Soda (Sweet/Salt)', price: 45, categoryId: coldBev.id, preparationTime: 5, image: '/api/menu/image/Fresh Lime Soda (Sweet/Salt)', description: 'Refreshing lime soda with choice of sweet or salt' },
+        { name: 'Mango Shake', price: 80, categoryId: coldBev.id, preparationTime: 7, image: '/api/menu/image/Mango Shake', description: 'Thick mango shake with fresh mangoes' },
+        { name: 'Banana Shake', price: 70, categoryId: coldBev.id, preparationTime: 7, image: '/api/menu/image/Banana Shake', description: 'Creamy banana shake with milk' },
+        { name: 'Rose Milk', price: 50, categoryId: coldBev.id, preparationTime: 5, image: '/api/menu/image/Rose Milk', description: 'Rose-flavored milk with aromatic essence' },
+        { name: 'Iced Tea (Lemon)', price: 70, categoryId: coldBev.id, preparationTime: 5, image: '/api/menu/image/Iced Tea (Lemon)', description: 'Chilled lemon tea with ice' },
+        { name: 'Iced Coffee', price: 95, categoryId: coldBev.id, preparationTime: 7, image: '/api/menu/image/Iced Coffee', description: 'Cold brew coffee with ice' },
+        { name: 'Watermelon Juice', price: 70, categoryId: coldBev.id, preparationTime: 5, image: '/api/menu/image/Watermelon Juice', description: 'Fresh watermelon juice' },
+        
+        // Breakfast
+        { name: 'Aloo Paratha', price: 60, categoryId: breakfast.id, preparationTime: 15, image: '/api/menu/image/Aloo Paratha', description: 'Stuffed potato paratha with butter' },
+        { name: 'Masala Dosa', price: 80, categoryId: breakfast.id, preparationTime: 20, image: '/api/menu/image/Masala Dosa', description: 'Crispy dosa with spiced potato filling' },
+        { name: 'Idli Sambar (2 pcs)', price: 45, categoryId: breakfast.id, preparationTime: 10, image: '/api/menu/image/Idli Sambar (2 pcs)', description: 'Steamed rice cakes with sambar and chutney' },
+        { name: 'Poha', price: 40, categoryId: breakfast.id, preparationTime: 12, image: '/api/menu/image/Poha', description: 'Flattened rice with vegetables and spices' },
+        { name: 'Upma', price: 45, categoryId: breakfast.id, preparationTime: 15, image: '/api/menu/image/Upma', description: 'Semolina porridge with vegetables' },
+        { name: 'Chole Bhature', price: 90, categoryId: breakfast.id, preparationTime: 20, image: '/api/menu/image/Chole Bhature', description: 'Spicy chickpeas with fried bread' },
+        { name: 'Veg Sandwich (Grilled)', price: 70, categoryId: breakfast.id, preparationTime: 10, image: '/api/menu/image/Veg Sandwich (Grilled)', description: 'Grilled sandwich with fresh vegetables' },
+        { name: 'Paneer Paratha', price: 75, categoryId: breakfast.id, preparationTime: 15, image: '/api/menu/image/Paneer Paratha', description: 'Stuffed cottage cheese paratha' },
+        { name: 'Poori Bhaji', price: 65, categoryId: breakfast.id, preparationTime: 15, image: '/api/menu/image/Poori Bhaji', description: 'Fried bread with spiced potato curry' },
+        { name: 'Sabudana Khichdi', price: 55, categoryId: breakfast.id, preparationTime: 15, image: '/api/menu/image/Sabudana Khichdi', description: 'Tapioca pearls with peanuts and spices' },
+        
+        // Lunch & Dinner
+        { name: 'Paneer Butter Masala with Naan', price: 170, categoryId: lunchDinner.id, preparationTime: 25, image: '/api/menu/image/Paneer Butter Masala with Naan', description: 'Creamy paneer curry with soft naan bread' },
+        { name: 'Veg Biryani', price: 150, categoryId: lunchDinner.id, preparationTime: 30, image: '/api/menu/image/Veg Biryani', description: 'Aromatic rice with mixed vegetables and spices' },
+        { name: 'Dal Tadka with Jeera Rice', price: 130, categoryId: lunchDinner.id, preparationTime: 20, image: '/api/menu/image/Dal Tadka with Jeera Rice', description: 'Tempered lentils with cumin rice' },
+        { name: 'Veg Thali (Full)', price: 180, categoryId: lunchDinner.id, preparationTime: 25, image: '/api/menu/image/Veg Thali (Full)', description: 'Complete meal with variety of dishes' },
+        { name: 'Chole Kulche', price: 90, categoryId: lunchDinner.id, preparationTime: 20, image: '/api/menu/image/Chole Kulche', description: 'Spicy chickpeas with soft kulcha bread' },
+        { name: 'Veg Fried Rice', price: 120, categoryId: lunchDinner.id, preparationTime: 15, image: '/api/menu/image/Veg Fried Rice', description: 'Stir-fried rice with mixed vegetables' },
+        { name: 'Hakka Noodles (Veg)', price: 130, categoryId: lunchDinner.id, preparationTime: 15, image: '/api/menu/image/Hakka Noodles (Veg)', description: 'Indo-Chinese style vegetable noodles' },
+        { name: 'Palak Paneer with Roti', price: 160, categoryId: lunchDinner.id, preparationTime: 20, image: '/api/menu/image/Palak Paneer with Roti', description: 'Spinach curry with cottage cheese and roti' },
+        { name: 'Rajma Chawal', price: 110, categoryId: lunchDinner.id, preparationTime: 20, image: '/api/menu/image/Rajma Chawal', description: 'Kidney bean curry with steamed rice' },
+        { name: 'Paneer Tikka', price: 150, categoryId: lunchDinner.id, preparationTime: 20, image: '/api/menu/image/Paneer Tikka', description: 'Grilled cottage cheese with spices' },
+        
+        // Desserts
+        { name: 'Gulab Jamun (2 pcs)', price: 40, categoryId: desserts.id, preparationTime: 5, image: '/api/menu/image/Gulab Jamun (2 pcs)', description: 'Sweet milk dumplings in sugar syrup' },
+        { name: 'Rasmalai (2 pcs)', price: 70, categoryId: desserts.id, preparationTime: 5, image: '/api/menu/image/Rasmalai (2 pcs)', description: 'Soft cottage cheese balls in sweet milk' },
+        { name: 'Kaju Katli (2 pcs)', price: 60, categoryId: desserts.id, preparationTime: 5, image: '/api/menu/image/Kaju Katli (2 pcs)', description: 'Diamond-shaped cashew sweets' },
+        { name: 'Gajar Halwa', price: 80, categoryId: desserts.id, preparationTime: 10, image: '/api/menu/image/Gajar Halwa', description: 'Carrot pudding with nuts and milk' },
+        { name: 'Kulfi (Malai)', price: 50, categoryId: desserts.id, preparationTime: 5, image: '/api/menu/image/Kulfi (Malai)', description: 'Traditional Indian ice cream' },
+        { name: 'Jalebi (100g)', price: 40, categoryId: desserts.id, preparationTime: 5, image: '/api/menu/image/Jalebi (100g)', description: 'Crispy sweet spirals in sugar syrup' },
+        { name: 'Rabri', price: 90, categoryId: desserts.id, preparationTime: 10, image: '/api/menu/image/Rabri', description: 'Thick sweetened milk with nuts' },
+        { name: 'Basundi', price: 100, categoryId: desserts.id, preparationTime: 10, image: '/api/menu/image/Basundi', description: 'Gujarati sweet thickened milk dessert' },
+        { name: 'Sandesh', price: 60, categoryId: desserts.id, preparationTime: 5, image: '/api/menu/image/Sandesh', description: 'Bengali cottage cheese sweet' },
+        { name: 'Badam Kheer', price: 80, categoryId: desserts.id, preparationTime: 15, image: '/api/menu/image/Badam Kheer', description: 'Almond rice pudding with cardamom' }
       ]);
       console.log('Default menu items created');
     }
