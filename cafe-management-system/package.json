@@ -12,7 +12,8 @@
     "seed": "node seedData.js",
     "migrate": "node migrations/migrate.js",
     "update-images": "node updateMenuImages.js",
-    "update-menu": "node updateNewMenu.js"
+    "update-menu": "node updateNewMenu.js",
+    "update-production-menu": "node updateProductionMenu.js"
   },
   "keywords": ["cafe", "restaurant", "management", "nodejs", "express", "mysql", "sequelize"],
   "author": "Your Name",
